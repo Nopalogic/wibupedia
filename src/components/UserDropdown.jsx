@@ -49,7 +49,7 @@ export default function UserDropdown({ user, img }) {
         className={`${dropdownPopoverShow ? "block" : "hidden"} z-50 float-left min-w-48 list-none rounded bg-white py-2 text-left text-base shadow-lg`}
       >
         <Link
-          href="/dashboard"
+          href="/u/dashboard"
           className="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-slate-700"
         >
           Dashboard

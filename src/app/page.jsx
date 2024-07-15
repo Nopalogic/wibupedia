@@ -13,7 +13,7 @@ export default async function Home() {
 				<div className="flex justify-between items-center p-4">
 					<h1 className="text-2xl font-bold text-slate-700">Most Popular</h1>
 
-					<Link href={'/'} className="md:text-md text-sm font-semibold text-slate-500 hover:text-slate-700 transition-all">
+					<Link href={'/popular'} className="md:text-md text-sm font-semibold text-slate-500 hover:text-slate-700 transition-all">
 						See more
 					</Link>
 				</div>

@@ -1,12 +1,22 @@
 import Image from "next/image";
 
 import VideoPlayer from "@/components/VideoPlayer";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import CollectionButton from "@/components/CollectionButton";
+import CommentBox from "@/components/CommentBox";
+import CommentField from "@/components/CommentField";
 
 import { getAnimeResponse } from "@/utils/api";
+import { authUserSession } from "@/utils/auth";
+
+import prisma from "@/utils/prisma";
 
 export default async function AnimeDetail({ params: { id } }) {
   const anime = await getAnimeResponse(`anime/${id}`);
+  const user = await authUserSession();
+
+  const collection = await prisma.collection.findFirst({
+    where: { user_email: user?.email, anime_mal_id: id },
+  });
 
   const members = new Intl.NumberFormat("en-Id").format(anime.members);
 
@@ -79,10 +89,14 @@ export default async function AnimeDetail({ params: { id } }) {
       </div>
 
       <div className="mx-4 mb-4">
-        <button className="flex w-full justify-center gap-2 rounded bg-orange-500 px-2 py-1 hover:bg-orange-600">
-          <PlusIcon className="size-6" />
-          Add to Collection
-        </button>
+        {!collection && user && (
+          <CollectionButton
+            anime_mal_id={id}
+            user_email={user?.email}
+            anime_image={anime.images.webp.image_url}
+            anime_title={anime.title}
+          />
+        )}
       </div>
 
       <div className="mx-4 mb-8 flex gap-4">
@@ -113,6 +127,22 @@ export default async function AnimeDetail({ params: { id } }) {
             {anime.synopsis}
           </p>
         </div>
+      </div>
+      <div className="flex flex-col gap-8 p-4">
+        <div>
+          <h3 className="text-color-primary mb-2 text-xl">Comment</h3>
+
+          {user && (
+            <CommentField
+              anime_mal_id={id}
+              user_email={user?.email}
+              username={user?.name}
+              anime_title={anime.title}
+            />
+          )}
+        </div>
+
+        <CommentBox anime_mal_id={id} />
       </div>
     </>
   );

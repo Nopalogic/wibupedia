@@ -17,7 +17,7 @@ export default async function Home() {
 						See more
 					</Link>
 				</div>
-				<div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 px-4">
+				<div className="grid md:grid-cols-4 grid-cols-1 gap-4 md:px-4">
 					{topAnime.map((anime, index) => (
 						<AnimeCard key={index} animeUrl={`/anime/${anime.mal_id}`} title={anime.title} eps={anime.episodes} imgUrl={anime.images.webp.image_url} />
 					))}
@@ -27,7 +27,7 @@ export default async function Home() {
 				<div className="flex justify-between items-center p-4">
 					<h1 className="text-2xl font-bold text-slate-100">Recommended for you</h1>
 				</div>
-				<div className="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-4 px-4">
+				<div className="grid md:grid-cols-5 grid-cols-1 gap-4 md:px-4">
 					{recommendedAnime.data.map((anime, index) => (
 						<AnimeCard key={index} animeUrl={`/anime/${anime.mal_id}`} title={anime.title} imgUrl={anime.images.webp.image_url} />
 					))}

@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className={`${openSans.className} bg-neutral-900 text-white`}>
+			<body className={`${openSans.className} bg-neutral-900 text-white`} suppressHydrationWarning={true}>
 				<Navbar />
 				<main className='mx-4 mt-16'>{children}</main>
 			</body>
